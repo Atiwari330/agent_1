@@ -45,6 +45,17 @@ import { convertToUIMessages, generateUUID } from "@/lib/utils";
 import { generateTitleFromUserMessage } from "../../actions";
 import { type PostRequestBody, postRequestBodySchema } from "./schema";
 
+// HubSpot tools from deal-agent workspace
+import {
+  getDealById,
+  searchDeals,
+  listDeals,
+  updateDealStage,
+  getDealProperties,
+  listDealStages,
+} from "deal-agent";
+
+export const runtime = "nodejs"; // Required for HubSpot SDK
 export const maxDuration = 60;
 
 let globalStreamContext: ResumableStreamContext | null = null;
@@ -192,6 +203,13 @@ export async function POST(request: Request) {
                   "createDocument",
                   "updateDocument",
                   "requestSuggestions",
+                  // HubSpot tools
+                  "getDealById",
+                  "searchDeals",
+                  "listDeals",
+                  "updateDealStage",
+                  "getDealProperties",
+                  "listDealStages",
                 ],
           experimental_transform: smoothStream({ chunking: "word" }),
           tools: {
@@ -202,6 +220,13 @@ export async function POST(request: Request) {
               session,
               dataStream,
             }),
+            // HubSpot tools
+            getDealById,
+            searchDeals,
+            listDeals,
+            updateDealStage,
+            getDealProperties,
+            listDealStages,
           },
           experimental_telemetry: {
             isEnabled: isProductionEnvironment,

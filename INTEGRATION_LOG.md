@@ -120,15 +120,36 @@ HUBSPOT_ACCESS_TOKEN=pat-na1-... # From .ENV.setup.md
 
 ---
 
-### Phase 4: HubSpot Tools Integration
+### Phase 4: HubSpot Tools Integration ✅
 
-[To be documented during implementation]
+**Date**: 2025-11-01
 
-**Plan**:
-- Import HubSpot tools into ChatBot route
-- Export Node.js runtime requirement
-- Register all 6 HubSpot tools in streamText()
-- Keep existing ChatBot features unchanged
+**Completed Steps**:
+- ✅ Created `src/index.ts` as main package entry point
+  - Exports all 6 HubSpot tools for workspace import
+  - Exports hubspotTools object and registerHubSpotTools function
+  - Exports types (Tool, ToolRegistry)
+- ✅ Updated `ai_chatbot/app/(chat)/api/chat/route.ts`:
+  - Added `export const runtime = "nodejs"` (required for HubSpot SDK)
+  - Imported all 6 HubSpot tools from "deal-agent" workspace
+  - Added tools to `experimental_activeTools` array
+  - Registered tools in `streamText()` tools object
+- ✅ All 6 HubSpot tools now available in ChatBot:
+  - `getDealById` - Get deal by ID
+  - `searchDeals` - Search deals with filters
+  - `listDeals` - List all deals
+  - `updateDealStage` - Update deal pipeline stage
+  - `getDealProperties` - Get available deal properties
+  - `listDealStages` - Get pipeline stages
+- ✅ Existing ChatBot features unchanged:
+  - Weather tool, document creation, suggestions all preserved
+  - Streaming, persistence, usage tracking intact
+
+**Result**: ✅ **Phase 4 Complete - HubSpot tools integrated into ChatBot!**
+
+ChatBot can now call HubSpot tools autonomously when users ask about deals, CRM data, or sales pipeline information.
+
+**Next**: Proceed to Phase 5 - System Prompt Updates (teach AI when to use HubSpot tools)
 
 ---
 
