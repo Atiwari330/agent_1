@@ -1,0 +1,35 @@
+{
+  "permissions": {
+    "allow": [
+      "WebSearch",
+      "WebFetch(domain:www.anthropic.com)",
+      "WebFetch(domain:ai-sdk.dev)",
+      "Bash(pnpm install:*)",
+      "Bash(pnpm add:*)",
+      "Bash(pnpm type-check:*)",
+      "Bash(pnpm test-agent:*)",
+      "Bash(tsx src/debug-tool.ts:*)",
+      "Bash(pnpm exec tsx:*)",
+      "Bash(pnpm list:*)",
+      "Bash(pnpm update:*)",
+      "WebFetch(domain:vercel.com)",
+      "WebFetch(domain:sdk.vercel.ai)",
+      "Bash(pnpm create:*)",
+      "Bash(package.json)",
+      "Bash(pnpm remove:*)",
+      "Bash(cat:*)",
+      "Bash(pnpm clean:*)",
+      "Bash(pnpm build:*)",
+      "Bash(ls:*)",
+      "WebFetch(domain:platform.openai.com)",
+      "WebFetch(domain:openai.com)",
+      "Bash(git init:*)",
+      "Bash(git remote add:*)",
+      "Bash(git add:*)",
+      "Bash(git rm:*)",
+      "Bash(git commit:*)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}
