@@ -96,15 +96,27 @@ HUBSPOT_ACCESS_TOKEN=pat-na1-... # From .ENV.setup.md
 
 ---
 
-### Phase 3: pnpm Workspace Setup
+### Phase 3: pnpm Workspace Setup ✅
 
-[To be documented during implementation]
+**Date**: 2025-11-01
 
-**Plan**:
-- Create pnpm-workspace.yaml at repo root
-- Link deal-agent and ai_chatbot as monorepo
-- Update package.json files with workspace dependencies
-- Verify imports work correctly
+**Completed Steps**:
+- ✅ Created `pnpm-workspace.yaml` at repo root
+  - Configured workspace packages: "." (deal-agent) and "ai_chatbot"
+- ✅ Updated `ai_chatbot/package.json`:
+  - Added `"deal-agent": "workspace:*"` dependency
+- ✅ Ran `pnpm install` at root:
+  - Successfully installed +625 packages
+  - Linked workspace dependencies via symlinks
+- ✅ Workspace structure verified:
+  - ai_chatbot can now import from deal-agent package
+  - Both packages use pnpm workspace protocol
+
+**Result**: ✅ **Phase 3 Complete - Monorepo structure established!**
+
+**Note**: Minor warning about deal-agent bin creation is expected (dist/ folder not built yet, will be resolved when needed for CLI usage).
+
+**Next**: Proceed to Phase 4 - HubSpot Tools Integration
 
 ---
 
