@@ -19,7 +19,7 @@ import { logger } from '../../utils/logger.js';
 export const getDealById = tool({
   description:
     'Get detailed information about a specific HubSpot deal by its ID. Returns all deal properties including name, stage, amount, close date, pipeline, owner, and associated data.',
-  parameters: z.object({
+  inputSchema: z.object({
     dealId: z.string().describe('The HubSpot deal ID to retrieve'),
   }),
   execute: async ({ dealId }: any) => {
@@ -61,7 +61,7 @@ export const getDealById = tool({
 export const searchDeals = tool({
   description:
     'Search for HubSpot deals using filters. Can filter by deal stage, pipeline, amount, close date, owner, and more. Returns matching deals with their properties.',
-  parameters: z.object({
+  inputSchema: z.object({
     stage: z
       .string()
       .optional()
@@ -166,7 +166,7 @@ export const searchDeals = tool({
 export const listDeals = tool({
   description:
     'List all HubSpot deals. Returns a paginated list of deals with their basic properties. Use this for getting an overview of all deals.',
-  parameters: z.object({
+  inputSchema: z.object({
     limit: z
       .number()
       .optional()
@@ -213,7 +213,7 @@ export const listDeals = tool({
 export const updateDealStage = tool({
   description:
     'Update the stage of a HubSpot deal. Use this to move deals through the pipeline (e.g., from "qualifiedtobuy" to "presentationscheduled").',
-  parameters: z.object({
+  inputSchema: z.object({
     dealId: z.string().describe('The ID of the deal to update'),
     newStage: z
       .string()
