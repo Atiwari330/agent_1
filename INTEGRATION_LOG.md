@@ -67,15 +67,32 @@ All tools execute correctly with v5. No breaking changes encountered. The agent'
 
 ---
 
-### Phase 2: GPT-5 Model Switch
+### Phase 2: GPT-5 Model Switch ✅
 
-[To be documented during implementation]
+**Date**: 2025-11-01
 
-**Plan**:
-- Update ai_chatbot/lib/ai/providers.ts to use OpenAI GPT-5 models
-- Configure: gpt-5-mini for chat, gpt-5-nano for titles
-- Ensure OPENAI_API_KEY is set in .env
-- Test ChatBot baseline with new models
+**Completed Steps**:
+- ✅ Updated `ai_chatbot/lib/ai/providers.ts` to use OpenAI GPT-5 models:
+  - `chat-model`: xai/grok-2-vision-1212 → openai/gpt-5-mini
+  - `chat-model-reasoning`: xai/grok-3-mini → openai/gpt-5
+  - `title-model`: xai/grok-2-1212 → openai/gpt-5-nano
+  - `artifact-model`: xai/grok-2-1212 → openai/gpt-5-mini
+- ✅ Updated `ai_chatbot/lib/ai/models.ts` with GPT-5 model descriptions:
+  - "GPT-5 Mini": Fast, balanced performance for tool calling (80% performance, 20% cost)
+  - "GPT-5": Maximum capability for complex reasoning
+- ✅ Removed reasoning middleware (not needed for GPT-5)
+- ✅ Using AI Gateway for consistent API routing
+
+**Result**: ✅ **Phase 2 Complete - ChatBot configured for GPT-5!**
+
+**Environment Configuration Required** (before testing):
+User needs to add to `ai_chatbot/.env` (not committed to git):
+```env
+OPENAI_API_KEY=sk-proj-...    # From .ENV.setup.md
+HUBSPOT_ACCESS_TOKEN=pat-na1-... # From .ENV.setup.md
+```
+
+**Next**: Proceed to Phase 3 - pnpm Workspace Setup
 
 ---
 
