@@ -153,15 +153,30 @@ ChatBot can now call HubSpot tools autonomously when users ask about deals, CRM 
 
 ---
 
-### Phase 5: System Prompt Updates
+### Phase 5: System Prompt Updates ✅
 
-[To be documented during implementation]
+**Date**: 2025-11-01
 
-**Plan**:
-- Add hubspotPrompt section to prompts.ts
-- Teach AI when and how to use HubSpot tools
-- Document tool selection strategy
-- Test with diverse HubSpot queries
+**Completed Steps**:
+- ✅ Added `hubspotPrompt` section to `ai_chatbot/lib/ai/prompts.ts`
+  - Documented all 6 HubSpot tools with descriptions
+  - Explained when to use HubSpot tools (keywords: deals, CRM, pipeline, HubSpot)
+  - Defined tool selection strategy:
+    - "show me all deals" → listDeals
+    - "find deals in [stage]" → searchDeals with filters
+    - "what stages do we have?" → listDealStages
+    - Multi-step queries → chain tools
+  - Specified response format guidelines
+  - Mentioned future capabilities (Gmail, Drive, Asana)
+- ✅ Updated `systemPrompt()` function:
+  - Added hubspotPrompt to both model paths (chat-model and chat-model-reasoning)
+  - HubSpot guidance now included in all AI conversations
+
+**Result**: ✅ **Phase 5 Complete - AI now understands when and how to use HubSpot tools!**
+
+The ChatBot's AI will now autonomously select the correct HubSpot tool based on user queries and provide properly formatted responses with deal data.
+
+**Next**: Phase 6 - Environment Configuration (add API keys to .env)
 
 ---
 

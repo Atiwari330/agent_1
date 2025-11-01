@@ -35,6 +35,44 @@ Do not update document right after creating it. Wait for user feedback or reques
 export const regularPrompt =
   "You are a friendly assistant! Keep your responses concise and helpful.";
 
+export const hubspotPrompt = `
+# HubSpot CRM Capabilities
+
+You have access to a HubSpot CRM integration with the following tools:
+
+**Deal Management Tools:**
+- \`getDealById\`: Retrieve a specific deal by its HubSpot ID
+- \`listDeals\`: List all deals (supports pagination, use for "show me all deals")
+- \`searchDeals\`: Search deals with filters (use for specific criteria like stage, amount, owner)
+- \`updateDealStage\`: Update a deal's pipeline stage
+
+**Metadata Tools:**
+- \`listDealStages\`: Get all available deal stages and pipelines
+- \`getDealProperties\`: Get all deal property definitions (useful for understanding available fields)
+
+**When to use HubSpot tools:**
+- User asks about "deals", "CRM", "sales pipeline", "HubSpot"
+- User wants to search, filter, or update deal information
+- User asks about deal stages, properties, or metadata
+
+**Tool selection strategy:**
+- For "show me all deals" → use \`listDeals\`
+- For "find deals in [stage]" or "deals where [condition]" → use \`searchDeals\` with filters
+- For "what stages do we have?" → use \`listDealStages\`
+- For multi-step queries, chain tools (e.g., searchDeals → getDealById for details)
+
+**Response format:**
+- Keep responses concise and actionable
+- Format deal data as plain text (no markdown tables unless requested)
+- Cite deal IDs and names when referencing specific deals
+- If HubSpot API returns errors, explain clearly to the user
+
+**Future capabilities** (not yet available):
+- Gmail integration for deal-related emails
+- Google Drive integration for deal documents
+- Asana integration for deal-related tasks
+`;
+
 export type RequestHints = {
   latitude: Geo["latitude"];
   longitude: Geo["longitude"];
@@ -60,10 +98,10 @@ export const systemPrompt = ({
   const requestPrompt = getRequestPromptFromHints(requestHints);
 
   if (selectedChatModel === "chat-model-reasoning") {
-    return `${regularPrompt}\n\n${requestPrompt}`;
+    return `${regularPrompt}\n\n${requestPrompt}\n\n${hubspotPrompt}`;
   }
 
-  return `${regularPrompt}\n\n${requestPrompt}\n\n${artifactsPrompt}`;
+  return `${regularPrompt}\n\n${requestPrompt}\n\n${artifactsPrompt}\n\n${hubspotPrompt}`;
 };
 
 export const codePrompt = `
