@@ -23,7 +23,6 @@ import type { ChatModel } from "@/lib/ai/models";
 import { type RequestHints, systemPrompt } from "@/lib/ai/prompts";
 import { myProvider } from "@/lib/ai/providers";
 import { createDocument } from "@/lib/ai/tools/create-document";
-import { getWeather } from "@/lib/ai/tools/get-weather";
 import { requestSuggestions } from "@/lib/ai/tools/request-suggestions";
 import { updateDocument } from "@/lib/ai/tools/update-document";
 import { isProductionEnvironment } from "@/lib/constants";
@@ -45,6 +44,17 @@ import { convertToUIMessages, generateUUID } from "@/lib/utils";
 import { generateTitleFromUserMessage } from "../../actions";
 import { type PostRequestBody, postRequestBodySchema } from "./schema";
 
+// HubSpot tools from deal-agent workspace
+import {
+  getDealById,
+  searchDeals,
+  listDeals,
+  updateDealStage,
+  getDealProperties,
+  listDealStages,
+} from "deal-agent";
+
+export const runtime = "nodejs"; // Required for HubSpot SDK
 export const maxDuration = 60;
 
 let globalStreamContext: ResumableStreamContext | null = null;
@@ -188,20 +198,32 @@ export async function POST(request: Request) {
             selectedChatModel === "chat-model-reasoning"
               ? []
               : [
-                  "getWeather",
                   "createDocument",
                   "updateDocument",
                   "requestSuggestions",
+                  // HubSpot tools
+                  "getDealById",
+                  "searchDeals",
+                  "listDeals",
+                  "updateDealStage",
+                  "getDealProperties",
+                  "listDealStages",
                 ],
           experimental_transform: smoothStream({ chunking: "word" }),
           tools: {
-            getWeather,
             createDocument: createDocument({ session, dataStream }),
             updateDocument: updateDocument({ session, dataStream }),
             requestSuggestions: requestSuggestions({
               session,
               dataStream,
             }),
+            // HubSpot tools
+            getDealById,
+            searchDeals,
+            listDeals,
+            updateDealStage,
+            getDealProperties,
+            listDealStages,
           },
           experimental_telemetry: {
             isEnabled: isProductionEnvironment,

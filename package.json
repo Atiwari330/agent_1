@@ -4,10 +4,22 @@
   "description": "AI-driven agentic workflow for deal management across HubSpot, Gmail, Drive, and Asana",
   "type": "module",
   "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "default": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
   "bin": {
     "deal-agent": "./dist/cli/index.js"
   },
   "scripts": {
+    "prepare": "pnpm build",
     "dev": "tsx watch src/cli/index.ts",
     "test-agent": "tsx src/test-agent.ts",
     "build": "tsc",
@@ -34,9 +46,9 @@
     "vitest": "^1.0.0"
   },
   "dependencies": {
-    "@ai-sdk/openai": "~1.3.24",
+    "@ai-sdk/openai": "^2.0.0",
     "@hubspot/api-client": "^11.0.0",
-    "ai": "~4.3.19",
+    "ai": "5.0.26",
     "chalk": "^5.0.0",
     "commander": "^12.0.0",
     "dotenv": "^16.0.0",

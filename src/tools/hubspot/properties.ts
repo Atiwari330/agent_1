@@ -18,7 +18,7 @@ import { logger } from '../../utils/logger.js';
 export const getDealProperties = tool({
   description:
     'Get all available HubSpot deal properties and their definitions. Returns property names, types, labels, and descriptions. Useful for understanding what fields are available on deals.',
-  parameters: z.object({}),
+  inputSchema: z.object({}),
   execute: async () => {
     logger.debug('Fetching deal properties');
 
@@ -52,7 +52,7 @@ export const getDealProperties = tool({
 export const listDealStages = tool({
   description:
     'Get all deal pipelines and their stages. Returns pipeline names, stage IDs, stage labels, and metadata like win probability. Essential for understanding your sales process structure.',
-  parameters: z.object({
+  inputSchema: z.object({
     pipelineId: z
       .string()
       .optional()
