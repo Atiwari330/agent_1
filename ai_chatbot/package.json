@@ -3,7 +3,8 @@
   "version": "3.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev --turbo",
+    "prebuild": "pnpm -w -F deal-agent build",
+    "dev": "pnpm -w -F deal-agent build && next dev",
     "build": "tsx lib/db/migrate && next build",
     "start": "next start",
     "lint": "npx ultracite@latest check",

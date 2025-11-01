@@ -19,4 +19,4 @@ export {
 } from './tools/hubspot/index.js';
 
 // Export types if needed
-export type { Tool, ToolRegistry } from './tools/base.js';
+export type { ToolRegistry } from './tools/base.js';

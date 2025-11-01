@@ -61,7 +61,7 @@ const mockDeals = {
  */
 export const getDealById = tool({
   description: 'Get detailed information about a specific deal by its ID. Returns all deal properties including name, stage, amount, contacts, and recent activity.',
-  parameters: z.object({
+  inputSchema: z.object({
     dealId: z.string().describe('The HubSpot deal ID to retrieve'),
   }),
   execute: async ({ dealId }: any) => {
@@ -86,7 +86,7 @@ export const getDealById = tool({
  */
 export const listDeals = tool({
   description: 'List all available deals. Returns an array of deal summaries with ID, name, stage, and amount.',
-  parameters: z.object({}),
+  inputSchema: z.object({}),
   execute: async () => {
     // Simulate network delay
     await new Promise((resolve) => setTimeout(resolve, 300));
@@ -114,7 +114,7 @@ export const listDeals = tool({
  */
 export const searchDealsByStage = tool({
   description: 'Search for deals in a specific pipeline stage. Useful for finding deals in negotiation, proposal, or closed-won stages.',
-  parameters: z.object({
+  inputSchema: z.object({
     stage: z.string().describe('The deal stage to filter by (e.g., negotiation, proposal, closed-won)'),
   }),
   execute: async ({ stage }: any) => {
@@ -149,7 +149,7 @@ export const searchDealsByStage = tool({
  */
 export const getDealSummary = tool({
   description: 'Get a quick summary of a deal including key metrics and status. This is a mock tool demonstrating a non-atomic operation.',
-  parameters: z.object({
+  inputSchema: z.object({
     dealId: z.string().describe('The deal ID to summarize'),
   }),
   execute: async ({ dealId }: any) => {
